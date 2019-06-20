@@ -6,22 +6,38 @@
     ],
     "target": "es5",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "dom"
     ],
+    "importHelpers": true,
+    "sourceMap": true,
     "moduleResolution": "node",
-    "module": "esnext",
+    "module": "commonjs",
     "esModuleInterop": true,
+    "pretty": true,
+    "removeComments": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "stripInternal": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "src/*": ["./src/*"]
     }
   },
   "include": ["src", "types"],
-  "exclude": ["node_modules", "**/__tests__/*", "dist"]
+  "exclude": ["node_modules", "**/__tests__/*", "dist", "**/*.test.ts"]
 }

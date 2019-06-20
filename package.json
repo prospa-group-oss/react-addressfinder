@@ -1,6 +1,6 @@
 {
-  "name": "address-lookup",
-  "version": "1.0.0",
+  "name": "react-addressfinder",
+  "version": "0.1.0",
   "description": "React address lookup component using AddressFinder",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,9 +8,9 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "prebuild": "rm -rf dist",
-    "build": "tsc",
+    "build": "tsc && cp ./src/widget.css ./dist",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}'",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -45,13 +45,12 @@
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "react": "^16.8.6"
   },
   "files": [
     "dist/**/*"
   ],
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
   }
 }

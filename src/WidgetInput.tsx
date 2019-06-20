@@ -1,13 +1,23 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  DetailedHTMLProps,
+  InputHTMLAttributes
+} from 'react';
 import { Country, ContainerPrefix, AddressFinderWidgetSrc } from './constants';
 import { window } from './globals';
 import { AddressMeta, Address } from './types';
 import { addressMetaToAddress } from './helpers';
-import './Input.scss';
+import './widget.css';
 
-export interface Props {
+export interface Props
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   id: string;
-  onSelect: (fullAddress: string, address: Address) => void;
+  onSelected: (fullAddress: string, address: Address) => void;
   addressFinderKey: string;
   country?: Country;
   container?: HTMLElement;
@@ -21,7 +31,7 @@ export default ({
   id,
   country = Country.AU,
   container,
-  onSelect,
+  onSelected,
   inputClassName,
   listClassName = 'address-autocomplete__suggestions',
   itemClassName = 'address-autocomplete__suggestions__item',
@@ -54,7 +64,7 @@ export default ({
   }, []);
 
   useEffect(() => {
-    if (scriptLoaded) {
+    if (scriptLoaded && mounted.current) {
       const widget = new window.AddressFinder.Widget(
         document.getElementById(id),
         addressFinderKey,
@@ -64,6 +74,7 @@ export default ({
           list_class: listClassName,
           item_class: itemClassName,
           hover_class: hoverClassName,
+          manual_style: true,
           container:
             container || document.getElementById(`${ContainerPrefix}-${id}`),
           address_params: {},
@@ -75,11 +86,11 @@ export default ({
       widget.on(
         'address:select',
         (fullAddress: string, metaData: AddressMeta) => {
-          onSelect(fullAddress, addressMetaToAddress(metaData, country));
+          onSelected(fullAddress, addressMetaToAddress(metaData, country));
         }
       );
     }
-  }, [id, country]);
+  }, [id, country, scriptLoaded]);
 
   return (
     <>
@@ -93,7 +104,12 @@ export default ({
         id={id}
         {...props}
       />
-      {!container && <div id={`${ContainerPrefix}-${id}`}></div>}
+      {!container && (
+        <div
+          id={`${ContainerPrefix}-${id}`}
+          className="address-autocomplete"
+        ></div>
+      )}
     </>
   );
 };
