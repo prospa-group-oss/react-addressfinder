@@ -1,6 +1,6 @@
 {
   "name": "react-addressfinder",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "React address lookup component using AddressFinder",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,6 +17,11 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
+  "homepage": "https://github.com/prospa-group-oss/react-addressfinder",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prospa-group-oss/react-addressfinder.git"
+  },
   "keywords": [
     "React",
     "addressfinder",
@@ -28,7 +33,10 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "author": "",
+  "author": {
+    "name": "Miymiy",
+    "email": "pukapp@gmail.com"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.8",

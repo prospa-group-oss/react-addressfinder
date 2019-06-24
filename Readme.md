@@ -36,7 +36,6 @@ const component = ({
   addressFinderKey,
   inputClassName,
   id,
-  name,
   ...props
 }: Props) =>
   <WidgetInput
@@ -76,6 +75,55 @@ Signature of the onSelect function is
 (fullAddress: string, address: Address) => void;
 ```
 
+## Example
+
+```js
+import React from 'react';
+import { WidgetInput, Address } from 'react-addressfinder';
+import { FieldProps } from 'formik';
+import configs from 'src/configuration';
+import 'react-addressfinder/dist/widget.css';
+
+interface Props extends FieldProps {
+  id: string;
+  suffix: string;
+}
+
+export default ({
+  id,
+  suffix,
+  field,
+  form: { touched, errors, setFieldValue },
+  ...props
+}: Props) => {
+  const { name, onChange, ...otherfields } = field;
+
+  const fieldClassName = `form-control${
+    touched[name] && errors[name] ? ' is-invalid' : ''
+  }`;
+
+  return (
+    <WidgetInput
+      addressFinderKey={configs.AddressFinderKey}
+      inputClassName={fieldClassName}
+      id={id}
+      name={name}
+      onSelected={(fullAddress: string, address: Address) => {
+        setFieldValue(id, fullAddress);
+        setFieldValue(`${id}${suffix}`, address);
+      }}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        /* make sure a valid address was selected from the list */
+        setFieldValue(`${id}${suffix}`, null);
+        onChange(e);
+      }}
+      {...otherfields}
+      {...props}
+    />
+  );
+};
+
+```
 
 <br />
 <br />
