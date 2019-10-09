@@ -68,7 +68,7 @@ export default ({
       const widget = new window.AddressFinder.Widget(
         document.getElementById(id),
         addressFinderKey,
-        'AU',
+        country,
         {
           /* eslint-disable @typescript-eslint/camelcase */
           list_class: listClassName,
