@@ -1,6 +1,6 @@
 {
   "name": "react-addressfinder",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React address lookup component using AddressFinder",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

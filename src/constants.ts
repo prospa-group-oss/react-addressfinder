@@ -1,6 +1,6 @@
 export enum Country {
-  AU = 'au',
-  NZ = 'nz'
+  AU = 'AU',
+  NZ = 'NZ'
 }
 
 export const ContainerPrefix = 'address-container';
