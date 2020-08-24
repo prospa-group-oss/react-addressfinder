@@ -7,6 +7,6 @@ interface Global extends NodeJS.Global {
   window: AppWindow;
 }
 
-const appGlobal = global as Global;
+const appGlobal = (global as unknown) as Global;
 
 export const window = appGlobal.window;
