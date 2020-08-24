@@ -1,4 +1,4 @@
-import { AddressMeta, Address } from './types';
+import { AddressMeta, Address } from "./types";
 
 const addressMetaToAddress = (meta: AddressMeta, country: string): Address => ({
   line1: meta.address_line_1,
