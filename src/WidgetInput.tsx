@@ -17,7 +17,7 @@ export interface Props
     HTMLInputElement
   > {
   id: string;
-  onSelected: (fullAddress: string, address: Address) => void;
+  onSelected: (fullAddress: string, address: Address | AddressMeta) => void;
   addressFinderKey: string;
   country?: Country;
   container?: HTMLElement;
@@ -25,6 +25,7 @@ export interface Props
   listClassName?: string;
   itemClassName?: string;
   hoverClassName?: string;
+  raw?: boolean;
 }
 
 export default ({
@@ -36,6 +37,7 @@ export default ({
   listClassName = 'address-autocomplete__suggestions',
   itemClassName = 'address-autocomplete__suggestions__item',
   hoverClassName = 'address-autocomplete__suggestions__item--active',
+  raw = false,
   addressFinderKey,
   ...props
 }: Props) => {
@@ -86,7 +88,13 @@ export default ({
       widget.on(
         'address:select',
         (fullAddress: string, metaData: AddressMeta) => {
-          onSelected(fullAddress, addressMetaToAddress(metaData, country));
+          let addressData: Address | AddressMeta = { ...metaData, country };
+
+          if (!raw) {
+            addressData = addressMetaToAddress(metaData, country);
+          }
+
+          onSelected(fullAddress, addressData);
         }
       );
     }
