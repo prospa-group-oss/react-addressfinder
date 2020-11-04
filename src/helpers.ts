@@ -1,5 +1,5 @@
-import { AddressMeta, Address } from "./types";
-import { Country } from "./constants";
+import { AddressMeta, Address } from './types';
+import { Country } from './constants';
 
 const addressMetaToAddress = (meta: AddressMeta, country: string): Address => {
   if (country === Country.AU) {
@@ -9,7 +9,7 @@ const addressMetaToAddress = (meta: AddressMeta, country: string): Address => {
       suburb: meta.locality_name,
       state: meta.state_territory,
       postcode: meta.postcode,
-      country,
+      country
     };
   }
 
@@ -19,7 +19,7 @@ const addressMetaToAddress = (meta: AddressMeta, country: string): Address => {
     suburb: meta.suburb,
     city: meta.city,
     postcode: meta.postcode,
-    country,
+    country
   };
 };
 
