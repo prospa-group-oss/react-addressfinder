@@ -3,13 +3,22 @@ import React, {
   useState,
   useRef,
   DetailedHTMLProps,
-  InputHTMLAttributes
-} from 'react';
-import { Country, ContainerPrefix, AddressFinderWidgetSrc } from './constants';
-import { window } from './globals';
-import { AddressMeta, Address } from './types';
-import { addressMetaToAddress } from './helpers';
-import './widget.css';
+  InputHTMLAttributes,
+} from "react";
+import { Country, ContainerPrefix, AddressFinderWidgetSrc } from "./constants";
+import { window } from "./globals";
+import {
+  Address,
+  AddressMeta,
+  AustraliaAddressLocationParams,
+  AustraliaAddressMetadataParams,
+  AustraliaAddressParams,
+  NewZealandAddressMetadataParams,
+  NewZealandAddressParams,
+  NewZealandLocationParams,
+} from "./types";
+import { addressMetaToAddress } from "./helpers";
+import "./widget.css";
 
 export interface Props
   extends DetailedHTMLProps<
@@ -17,26 +26,59 @@ export interface Props
     HTMLInputElement
   > {
   id: string;
-  onSelected: (fullAddress: string, address: Address) => void;
   addressFinderKey: string;
-  country?: Country;
+  addressMetadataParams?: AustraliaAddressMetadataParams &
+    NewZealandAddressMetadataParams;
+  addressParams?: AustraliaAddressParams & NewZealandAddressParams;
+  baseUrl?: String;
+  canonical?: boolean;
   container?: HTMLElement;
-  inputClassName?: string;
-  listClassName?: string;
-  itemClassName?: string;
+  country?: Country;
+  emptyClassName?: string;
+  emptyContent?: string;
+  footerClassName?: string;
   hoverClassName?: string;
+  ignoreReturns?: boolean;
+  inputClassName?: string;
+  itemClassName?: string;
+  listClassName?: string;
+  locationParams?: AustraliaAddressLocationParams & NewZealandLocationParams;
+  manualStyle?: boolean;
+  maxResults?: number;
+  onSelected: (fullAddress: string, address: Address) => void;
+  position?: string;
+  showAddresses?: boolean;
+  showLocations?: boolean;
+  showNearby?: boolean;
+  showPointsOfInterest?: boolean;
 }
 
 export default ({
   id,
-  country = Country.AU,
-  container,
-  onSelected,
-  inputClassName,
-  listClassName = 'address-autocomplete__suggestions',
-  itemClassName = 'address-autocomplete__suggestions__item',
-  hoverClassName = 'address-autocomplete__suggestions__item--active',
   addressFinderKey,
+  addressMetadataParams,
+  addressParams = {},
+  baseUrl = "https://api.addressfinder.io",
+  canonical = false,
+  container,
+  country = Country.AU,
+  emptyClassName = "af_empty",
+  emptyContent = "No addresses were found. This could be a new address, or you may need to check the spelling.",
+  footerClassName = "af_footer",
+  hoverClassName = "address-autocomplete__suggestions__item--active",
+  ignoreReturns = true,
+  inputClassName,
+  itemClassName = "address-autocomplete__suggestions__item",
+  listClassName = "address-autocomplete__suggestions",
+  locationParams = {},
+  manualStyle = true,
+  maxResults = 5,
+  onSelected,
+  position = "",
+  showAddresses = true,
+  showLocations = true,
+  showNearby = false,
+  showPointsOfInterest = false,
   ...props
 }: Props) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -48,10 +90,10 @@ export default ({
       setScriptLoaded(true);
       return;
     }
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = AddressFinderWidgetSrc;
     script.async = true;
-    script.addEventListener('load', () => {
+    script.addEventListener("load", () => {
       if (mounted.current) {
         setScriptLoaded(true);
       }
@@ -71,20 +113,33 @@ export default ({
         country,
         {
           /* eslint-disable @typescript-eslint/camelcase */
-          list_class: listClassName,
-          item_class: itemClassName,
-          hover_class: hoverClassName,
-          manual_style: true,
+          address_params: addressParams,
+          address_metadata_params: addressMetadataParams,
+          base_url: baseUrl,
+          canonical,
           container:
             container || document.getElementById(`${ContainerPrefix}-${id}`),
-          address_params: {},
-          max_results: 5
+          empty_class: emptyClassName,
+          empty_content: emptyContent,
+          footer_class: footerClassName,
+          hover_class: hoverClassName,
+          ignore_returns: ignoreReturns,
+          item_class: itemClassName,
+          list_class: listClassName,
+          location_params: locationParams,
+          manual_style: manualStyle,
+          max_results: maxResults,
+          position,
+          show_addresses: showAddresses,
+          show_locations: showLocations,
+          show_nearby: showNearby,
+          show_points_of_interest: showPointsOfInterest,
           /* eslint-enable @typescript-eslint/camelcase */
         }
       );
 
       widget.on(
-        'address:select',
+        "address:select",
         (fullAddress: string, metaData: AddressMeta) => {
           onSelected(fullAddress, addressMetaToAddress(metaData, country));
         }
