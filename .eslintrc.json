@@ -1,9 +1,9 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
   "plugins": ["react", "@typescript-eslint", "prettier"],
@@ -14,12 +14,7 @@
     "node": true,
     "es6": true
   },
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "react/display-name": 0,
-    "prettier/prettier": ["error", { "singleQuote": true }],
-    "no-console": 1
-  },
+  "rules": {},
   "settings": {
     "react": {
       "pragma": "React",
@@ -28,6 +23,5 @@
   },
   "globals": {
     "window": true
-  },
-  "parser": "@typescript-eslint/parser"
+  }
 }

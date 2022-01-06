@@ -1,19 +1,23 @@
 # React Component for AddressFinder
 
-This is a react wrapper component for [AddressFinder's](https://addressfinder.com.au/docs/widget_docs/) widget.
+This is a react wrapper component for
+[AddressFinder's](https://addressfinder.com.au/docs/widget_docs/) widget.
 
 ## Getting started
 
 ### Setup
 
-Include the widget script manually 
+Include the widget script manually
 
 ```html
-<script type="text/javascript" src="https://api.addressfinder.io/assets/v3/widget.js" async></script>
+<script
+  type="text/javascript"
+  src="https://api.addressfinder.io/assets/v3/widget.js"
+  async
+></script>
 ```
 
 or the component will load the library for you if not found under the window object.
-
 
 ### Install
 
@@ -51,21 +55,22 @@ const component = ({
 
 ## Component props
 
-| Prop               | Type        | Required | Default                                           |
-|--------------------|-------------|----------|---------------------------------------------------|
-| id                 | string      |    yes   |                                                   |
-| addressFinderKey   | string      |    yes   |                                                   |
-| onSelected         | function    |    yes   |                                                   |
-| country            | string      |    no    | `AU`                                              |
-| container          | HtmlElement |    no    | div with id `address-container-${id}`             |
-| inputClassName     | string      |    no    | ''                                                |
-| listClassName      | string      |    no    | `address-autocomplete__suggestions`               |
-| itemClassName      | string      |    no    | `address-autocomplete__suggestions__item`         |
-| hoverClassName     | string      |    no    | `address-autocomplete__suggestions__item--active` |
+| Prop             | Type        | Required | Default                                           |
+| ---------------- | ----------- | -------- | ------------------------------------------------- |
+| id               | string      | yes      |                                                   |
+| addressFinderKey | string      | yes      |                                                   |
+| onSelected       | function    | yes      |                                                   |
+| country          | string      | no       | `AU`                                              |
+| container        | HtmlElement | no       | div with id `address-container-${id}`             |
+| inputClassName   | string      | no       | ''                                                |
+| listClassName    | string      | no       | `address-autocomplete__suggestions`               |
+| itemClassName    | string      | no       | `address-autocomplete__suggestions__item`         |
+| hoverClassName   | string      | no       | `address-autocomplete__suggestions__item--active` |
 
 ### Prop: container
 
-The container where suggestion list will be docked inside. If not provided, the list sits directly inside a `div` under the input.
+The container where suggestion list will be docked inside. If not provided, the list sits directly
+inside a `div` under the input.
 
 ### Prop: onSelected
 
@@ -98,9 +103,7 @@ export default ({
 }: Props) => {
   const { name, onChange, ...otherfields } = field;
 
-  const fieldClassName = `form-control${
-    touched[name] && errors[name] ? ' is-invalid' : ''
-  }`;
+  const fieldClassName = `form-control${touched[name] && errors[name] ? ' is-invalid' : ''}`;
 
   return (
     <WidgetInput
@@ -122,7 +125,6 @@ export default ({
     />
   );
 };
-
 ```
 
 <br />
