@@ -1,21 +1,20 @@
 import React, {
   useEffect,
-  useState,
   useRef,
+  useState,
   DetailedHTMLProps,
-  InputHTMLAttributes
+  FC,
+  InputHTMLAttributes,
 } from 'react';
-import { Country, ContainerPrefix, AddressFinderWidgetSrc } from './constants';
-import { window } from './globals';
-import { AddressMeta, Address } from './types';
+
+import { AddressFinderWidgetSrc, ContainerPrefix, Country } from './constants';
 import { addressMetaToAddress } from './helpers';
+import { Address } from './types';
+
 import './widget.css';
 
-export interface Props
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+interface WidgetInputProps
+  extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   id: string;
   onSelected: (fullAddress: string, address: Address) => void;
   addressFinderKey: string;
@@ -27,7 +26,9 @@ export interface Props
   hoverClassName?: string;
 }
 
-export default ({
+export type Props = WidgetInputProps;
+
+const WidgetInput: FC<WidgetInputProps> = ({
   id,
   country = Country.AU,
   container,
@@ -38,7 +39,7 @@ export default ({
   hoverClassName = 'address-autocomplete__suggestions__item--active',
   addressFinderKey,
   ...props
-}: Props) => {
+}) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const mounted = useRef(false);
 
@@ -66,29 +67,23 @@ export default ({
   useEffect(() => {
     if (scriptLoaded && mounted.current) {
       const widget = new window.AddressFinder.Widget(
-        document.getElementById(id),
+        document.getElementById(id) as HTMLElement,
         addressFinderKey,
         country,
         {
-          /* eslint-disable @typescript-eslint/camelcase */
           list_class: listClassName,
           item_class: itemClassName,
           hover_class: hoverClassName,
           manual_style: true,
-          container:
-            container || document.getElementById(`${ContainerPrefix}-${id}`),
+          container: container || document.getElementById(`${ContainerPrefix}-${id}`),
           address_params: {},
-          max_results: 5
-          /* eslint-enable @typescript-eslint/camelcase */
-        }
+          max_results: 5,
+        },
       );
 
-      widget.on(
-        'address:select',
-        (fullAddress: string, metaData: AddressMeta) => {
-          onSelected(fullAddress, addressMetaToAddress(metaData, country));
-        }
-      );
+      widget.on('address:select', (fullAddress, metaData) => {
+        onSelected(fullAddress, addressMetaToAddress(metaData, country));
+      });
     }
   }, [id, country, scriptLoaded]);
 
@@ -104,12 +99,9 @@ export default ({
         id={id}
         {...props}
       />
-      {!container && (
-        <div
-          id={`${ContainerPrefix}-${id}`}
-          className="address-autocomplete"
-        ></div>
-      )}
+      {!container && <div id={`${ContainerPrefix}-${id}`} className="address-autocomplete"></div>}
     </>
   );
 };
+
+export default WidgetInput;

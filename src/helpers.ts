@@ -1,5 +1,5 @@
-import { AddressMeta, Address } from "./types";
-import { Country } from "./constants";
+import { Country } from './constants';
+import { Address, AddressMeta } from './types';
 
 const addressMetaToAddress = (meta: AddressMeta, country: string): Address => {
   if (country === Country.AU) {
