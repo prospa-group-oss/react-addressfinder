@@ -66,6 +66,7 @@ const component = ({
 | listClassName    | string      | no       | `address-autocomplete__suggestions`               |
 | itemClassName    | string      | no       | `address-autocomplete__suggestions__item`         |
 | hoverClassName   | string      | no       | `address-autocomplete__suggestions__item--active` |
+| raw              | boolean     | no       | false                                             |
 
 ### Prop: container
 
@@ -87,7 +88,6 @@ import React from 'react';
 import { WidgetInput, Address } from 'react-addressfinder';
 import { FieldProps } from 'formik';
 import configs from 'src/configuration';
-import 'react-addressfinder/dist/widget.css';
 
 interface Props extends FieldProps {
   id: string;
@@ -130,4 +130,4 @@ export default ({
 <br />
 <br />
 
-More to come - component wrapper AddressFinder apis...
+Find out more details in [official docs](https://addressfinder.com.au/api/au/address/autocomplete/)
