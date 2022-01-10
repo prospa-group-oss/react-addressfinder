@@ -9,14 +9,14 @@ import React, {
 
 import { AddressFinderWidgetSrc, ContainerPrefix, Country } from './constants';
 import { addressMetaToAddress } from './helpers';
-import { Address } from './types';
+import { Address, AddressMeta } from './types';
 
 import './widget.css';
 
 interface WidgetInputProps
   extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   id: string;
-  onSelected: (fullAddress: string, address: Address) => void;
+  onSelected: (fullAddress: string, address: Address | AddressMeta) => void;
   addressFinderKey: string;
   country?: Country;
   container?: HTMLElement;
@@ -24,6 +24,7 @@ interface WidgetInputProps
   listClassName?: string;
   itemClassName?: string;
   hoverClassName?: string;
+  raw?: boolean;
 }
 
 export type Props = WidgetInputProps;
@@ -38,6 +39,7 @@ const WidgetInput: FC<WidgetInputProps> = ({
   itemClassName = 'address-autocomplete__suggestions__item',
   hoverClassName = 'address-autocomplete__suggestions__item--active',
   addressFinderKey,
+  raw = false,
   ...props
 }) => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -82,7 +84,13 @@ const WidgetInput: FC<WidgetInputProps> = ({
       );
 
       widget.on('address:select', (fullAddress, metaData) => {
-        onSelected(fullAddress, addressMetaToAddress(metaData, country));
+        let addressData: Address | AddressMeta = { ...metaData, country };
+
+        if (!raw) {
+          addressData = addressMetaToAddress(metaData, country);
+        }
+
+        onSelected(fullAddress, addressData);
       });
     }
   }, [id, country, scriptLoaded]);
