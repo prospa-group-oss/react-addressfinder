@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": {
-    "name": "Miymiy",
-    "email": "pukapp@gmail.com"
+    "name": "Prospa",
+    "email": "renewals@prospa.com"
   },
   "license": "MIT",
   "scripts": {
