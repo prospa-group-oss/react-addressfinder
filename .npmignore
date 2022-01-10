@@ -6,3 +6,5 @@ public/
 .prettierrc
 jest.config.js
 tsconfig.json
+babel.config.js
+webpack.config.js
