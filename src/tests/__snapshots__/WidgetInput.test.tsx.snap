@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WidgetInput snapshot 1`] = `
+<div>
+  <input
+    aria-autocomplete="list"
+    aria-haspopup="true"
+    aria-owns="address-container-testId"
+    autocomplete="off"
+    id="testId"
+    type="text"
+  />
+  <div
+    class="address-autocomplete"
+    id="address-container-testId"
+  />
+</div>
+`;

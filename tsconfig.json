@@ -34,5 +34,5 @@
     }
   },
   "include": ["src", "types"],
-  "exclude": ["node_modules", "**/__tests__/*", "dist", "**/*.test.ts"]
+  "exclude": ["node_modules", "**/tests/*", "dist", "**/*.test.ts", "./src/example.tsx"]
 }

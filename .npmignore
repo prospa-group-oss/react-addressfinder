@@ -1,0 +1,8 @@
+src/tests/**/*
+src/example.tsx
+public/
+.editorconfig
+.eslintrc.json
+.prettierrc
+jest.config.js
+tsconfig.json
