@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/example.tsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build-playground'),
     clean: true,
   },
   resolve: {
