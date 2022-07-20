@@ -8,6 +8,9 @@
     "name": "Prospa",
     "email": "renewals@prospa.com"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --open",
