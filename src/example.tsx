@@ -13,6 +13,7 @@ const AddressFinder = () => (
     placeholder="Street address, suburb, state"
     onSelected={console.log}
     onChange={console.log}
+    addressParams={{ post_box: '0' }}
   />
 );
 
