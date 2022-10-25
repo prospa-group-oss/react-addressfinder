@@ -20,3 +20,23 @@ export interface Address {
   country: string;
   city?: string;
 }
+
+export interface AddressParams {
+  // AU address params
+
+  gnaf?: string;
+  au_paf?: string;
+  canonical?: string;
+  state_codes?: string;
+
+  // NZ address params
+
+  delivered?: string;
+  rural?: string;
+  region_codes?: string;
+
+  // common address params
+
+  post_box?: string;
+  max?: number;
+}
