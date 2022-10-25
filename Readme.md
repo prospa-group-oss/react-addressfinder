@@ -69,6 +69,8 @@ const component = ({
 | raw              | boolean     | no       | false                                             |
 | addressParams    | Record      | no       |                                                   |
 
+Address param options can be found [here](https://addressfinder.com.au/docs/widget_docs/)
+
 ### Prop: container
 
 The container where suggestion list will be docked inside. If not provided, the list sits directly
